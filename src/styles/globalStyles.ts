@@ -2,19 +2,23 @@ import { createGlobalStyle, css } from 'styled-components';
 
 const misc = {
    rounded: {
-      xs: '5px',
+      xs: '8px',
       sm: '10px',
       md: '15px',
       lg: '20px',
       full: '999px',
    },
+   transition: {
+      ease: 'all 0.3s ease-in-out',
+   },
 };
 
 const typography = {
    type: {
-      primary: `'Jost', sans-serif`,
+      primary: ` 'League Spartan', sans-serif`,
    },
    weight: {
+      light: '300',
       normal: '400',
       medium: '500',
       semibold: '600',
@@ -32,11 +36,14 @@ const breakpoints = {
 
 const bodyStyles = css`
    font-family: ${typography.type.primary};
+   font-size: 1rem;
    background-color: ${(props) => props.theme.body};
+   color: ${(props) => props.theme.text};
    line-height: 1.6;
    max-width: 1600px;
    font-weight: 400;
    margin: auto;
+   transition: ${misc.transition.ease};
 
    *,
    ::after,
@@ -60,10 +67,11 @@ const bodyStyles = css`
       font-weight: ${typography.weight.bold};
       letter-spacing: 0.5px;
       line-height: 1;
+      color: ${(props) => props.theme.boldText};
    }
 
    p {
-      font-size: 0.9rem;
+      font-size: 1rem;
       margin-bottom: 1rem;
 
       @media screen and (min-width: ${breakpoints.tablet}) {
@@ -85,16 +93,16 @@ const bodyStyles = css`
    }
 
    .container {
-      width: 88%;
+      width: 90%;
       margin: auto;
 
       @media screen and (min-width: ${breakpoints.tablet}) {
-         width: 88%;
+         width: 90%;
       }
 
       @media screen and (min-width: ${breakpoints.desktop}) {
-         width: 80%;
-         max-width: 1110px;
+         width: 65%;
+         max-width: 800px;
       }
    }
 

@@ -1,5 +1,12 @@
+import { Invoices, InvoicesHeader } from '../components';
+
 const Home = () => {
-   return <div>Home</div>;
+   return (
+      <>
+         <InvoicesHeader />
+         <Invoices />
+      </>
+   );
 };
 
 export default Home;
