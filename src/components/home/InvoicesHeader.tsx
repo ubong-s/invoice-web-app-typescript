@@ -1,16 +1,23 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import styled, { css } from 'styled-components';
 import { useAppDispatch } from '../../app/hooks';
 import { RootState } from '../../app/store';
-import { toggleFilter } from '../../features/global/globalSlice';
+import { updateFilter } from '../../features/invoice/invoiceSlice';
 import { breakpoints, misc, typography } from '../../styles/globalStyles';
+import filterData from '../../data/filterData.json';
+import { toggleInvoiceModal } from '../../features/global/globalSlice';
 
 const InvoicesHeader = () => {
-   const dispatch = useDispatch();
-   const {
-      invoice: { filtered_data },
-      global: { filter },
-   } = useSelector((state: RootState) => state);
+   const dispatch = useAppDispatch();
+   const { filtered_data, filterQuery } = useSelector(
+      (state: RootState) => state.invoice
+   );
+   const [filterOpen, setFilterOpen] = useState(false);
+
+   const toggleFilter = () => {
+      setFilterOpen(!filterOpen);
+   };
 
    return (
       <InvoicesHeaderRoot className='container'>
@@ -23,9 +30,12 @@ const InvoicesHeader = () => {
             </p>
          </Title>
 
-         <FilterRoot onClick={() => dispatch(toggleFilter())} filter={filter}>
+         <FilterRoot
+            onClick={toggleFilter}
+            filterOpen={filterOpen ? 'active' : null}
+         >
             <div className='filter'>
-               Filter <span>by status</span>
+               Filter <span>by status</span>{' '}
                <svg width='11' height='7' xmlns='http://www.w3.org/2000/svg'>
                   <path
                      d='M1 1l4.228 4.228L9.456 1'
@@ -38,22 +48,27 @@ const InvoicesHeader = () => {
             </div>
 
             <fieldset>
-               <label htmlFor='paid'>
-                  <input type='checkbox' name='status' id='paid' />
-                  paid
-               </label>
-               <label htmlFor='pending'>
-                  <input type='checkbox' name='status' id='pending' />
-                  pending
-               </label>
-               <label htmlFor='draft'>
-                  <input type='checkbox' name='statxxxus' id='draft' />
-                  draft
-               </label>
+               {filterData.filters.map((filter) => (
+                  <label key={filter.id} htmlFor={filter.status}>
+                     <input
+                        type='checkbox'
+                        name='status'
+                        id={filter.status}
+                        value={filter.status}
+                        checked={filterQuery === filter.status}
+                        onChange={(e) =>
+                           e.target.value === filterQuery
+                              ? dispatch(updateFilter(''))
+                              : dispatch(updateFilter(e.target.value))
+                        }
+                     />
+                     {filter.status}
+                  </label>
+               ))}
             </fieldset>
          </FilterRoot>
 
-         <NewInvoice>
+         <NewInvoice onClick={() => dispatch(toggleInvoiceModal())}>
             <span className='icon'>
                <svg width='11' height='11' xmlns='http://www.w3.org/2000/svg'>
                   <path
@@ -116,7 +131,7 @@ const Title = styled.div`
    }
 `;
 
-const FilterRoot = styled.div<{ filter: boolean }>`
+const FilterRoot = styled.div<{ filterOpen: string | null }>`
    position: relative;
 
    .filter {
@@ -126,7 +141,7 @@ const FilterRoot = styled.div<{ filter: boolean }>`
       }
 
       svg {
-         margin-left: 1rem;
+         margin-left: 0.5rem;
          transition: ${misc.transition.ease};
       }
    }
@@ -135,8 +150,8 @@ const FilterRoot = styled.div<{ filter: boolean }>`
       position: absolute;
       padding: 1.25rem;
       margin-top: 0.5rem;
-      left: -50%;
-      width: 100%;
+      right: 0;
+      width: 150px;
       border: none;
       background-color: ${(props) => props.theme.cardBody};
       border-radius: ${misc.rounded.sm};
@@ -149,14 +164,19 @@ const FilterRoot = styled.div<{ filter: boolean }>`
          display: flex;
          gap: 0.75rem;
          text-transform: capitalize;
+
+         input {
+            position: relative;
+            z-index: 10;
+         }
       }
    }
 
-   ${({ filter }) =>
-      filter &&
+   ${({ filterOpen }) =>
+      filterOpen &&
       css`
          fieldset {
-            z-index: 2;
+            z-index: 10;
             opacity: 1;
          }
 
@@ -176,6 +196,7 @@ const FilterRoot = styled.div<{ filter: boolean }>`
 
       fieldset {
          left: 0;
+         width: 150px;
       }
    }
 `;

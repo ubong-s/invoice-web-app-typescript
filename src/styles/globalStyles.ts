@@ -44,6 +44,21 @@ const bodyStyles = css`
    font-weight: 400;
    margin: auto;
    transition: ${misc.transition.ease};
+   overflow-y: scroll;
+
+   &::-webkit-scrollbar {
+      width: 0.75em;
+   }
+
+   &::-webkit-scrollbar-track {
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+   }
+
+   &::-webkit-scrollbar-thumb {
+      background-color: darkgrey;
+      border-radius: 10px;
+      /* outline: 1px solid slategrey; */
+   }
 
    *,
    ::after,
@@ -108,11 +123,74 @@ const bodyStyles = css`
 
    .btn {
       cursor: pointer;
-      padding: 0.5rem 1rem;
-      border-radius: ${misc.rounded.sm};
+      padding: 1rem 1.5rem;
+      border-radius: ${misc.rounded.full};
       border: none;
+      font-size: 1rem;
       font-weight: ${typography.weight.semibold};
       text-transform: capitalize;
+      color: ${(props) => props.theme.white};
+
+      &.edit {
+         background-color: ${(props) => props.theme.bodyAlt};
+         color: ${(props) => props.theme.text};
+      }
+
+      &.delete {
+         background-color: ${(props) => props.theme.red};
+      }
+
+      &.paid {
+         background-color: ${(props) => props.theme.accent};
+      }
+   }
+
+   .badge {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 0.75rem;
+      border-radius: ${misc.rounded.xs};
+      text-transform: capitalize;
+      font-weight: ${typography.weight.semibold};
+      font-size: 1rem;
+      background-color: gray;
+      width: 100%;
+
+      .circle {
+         width: 7px;
+         height: 7px;
+         border-radius: 50%;
+         background-color: black;
+      }
+
+      &.paid {
+         background-color: rgba(51, 214, 159, 0.1);
+         color: ${(props) => props.theme.green};
+
+         .circle {
+            background-color: ${(props) => props.theme.green};
+         }
+      }
+
+      &.pending {
+         background-color: rgba(255, 143, 0, 0.1);
+         color: ${(props) => props.theme.orange};
+
+         .circle {
+            background-color: ${(props) => props.theme.orange};
+         }
+      }
+
+      &.draft {
+         background-color: ${(props) => props.theme.bodyAlt};
+         color: ${(props) => props.theme.boldText};
+
+         .circle {
+            background-color: ${(props) => props.theme.boldText};
+         }
+      }
    }
 `;
 

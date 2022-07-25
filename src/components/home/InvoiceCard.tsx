@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { breakpoints, misc, typography } from '../../styles/globalStyles';
 import { InvoiceCardProps } from '../../types';
+import { formatDate } from '../../utils/helpers';
 
 const InvoiceCard = ({
    id,
@@ -11,14 +12,6 @@ const InvoiceCard = ({
    status,
    total,
 }: InvoiceCardProps) => {
-   const formatDate = (date: string) => {
-      return new Date(date).toLocaleString('en-us', {
-         day: 'numeric',
-         month: 'short',
-         year: 'numeric',
-      });
-   };
-
    return (
       <Link to={`/invoice/${id}`}>
          <InvoiceCardRoot>
@@ -68,7 +61,7 @@ const InvoiceCardRoot = styled.article`
    border-radius: ${misc.rounded.xs};
    border: 1px solid transparent;
    transition: ${misc.transition.ease};
-   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+   box-shadow: rgba(0, 0, 0, 0.015) 0px 5px 15px 0px;
 
    a {
       color: ${(props) => props.theme.text};
@@ -145,54 +138,6 @@ const InvoiceCardBtm = styled.div`
          margin-top: 1rem;
          line-height: 0.5;
          color: ${(props) => props.theme.boldText};
-      }
-   }
-
-   .badge {
-      display: flex;
-      gap: 0.5rem;
-      align-items: center;
-      justify-content: center;
-      padding: 0.65rem 0.75rem;
-      border-radius: ${misc.rounded.xs};
-      text-transform: capitalize;
-      font-weight: ${typography.weight.semibold};
-      font-size: 1rem;
-      background-color: gray;
-      width: 100%;
-
-      .circle {
-         width: 7px;
-         height: 7px;
-         border-radius: 50%;
-         background-color: black;
-      }
-
-      &.paid {
-         background-color: rgba(51, 214, 159, 0.1);
-         color: ${(props) => props.theme.green};
-
-         .circle {
-            background-color: ${(props) => props.theme.green};
-         }
-      }
-
-      &.pending {
-         background-color: rgba(255, 143, 0, 0.1);
-         color: ${(props) => props.theme.orange};
-
-         .circle {
-            background-color: ${(props) => props.theme.orange};
-         }
-      }
-
-      &.draft {
-         background-color: ${(props) => props.theme.draftBadgeBG};
-         color: ${(props) => props.theme.boldText};
-
-         .circle {
-            background-color: ${(props) => props.theme.boldText};
-         }
       }
    }
 

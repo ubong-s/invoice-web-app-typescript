@@ -1,7 +1,6 @@
 export interface GlobalState {
    darkMode: boolean;
-   InvoiceModal: boolean;
-   filter: boolean;
+   invoiceModal: boolean;
 }
 
 export interface AddressProps {
@@ -42,6 +41,8 @@ export interface Invoice {
 export interface InvoiceState {
    data: Invoice[];
    filtered_data: Invoice[];
+   single_invoice?: Invoice;
+   filterQuery: string;
 }
 
 export interface LayoutProps {

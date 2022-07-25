@@ -17,15 +17,15 @@ function App() {
       <ThemeProvider theme={darkMode ? myTheme.darkTheme : myTheme.lightTheme}>
          <GlobalStyle />
          <Suspense fallback={`Loading...`}>
-            <Layout>
-               <Router>
+            <Router>
+               <Layout>
                   <Routes>
                      <Route path='/' element={<Home />} />
                      <Route path='/invoice/:id' element={<Invoice />} />
                      <Route path='*' element={<NotFound />} />
                   </Routes>
-               </Router>
-            </Layout>
+               </Layout>
+            </Router>
          </Suspense>
       </ThemeProvider>
    );
