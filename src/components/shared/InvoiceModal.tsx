@@ -17,9 +17,9 @@ const InvoiceModal = () => {
             onClick={() => dispatch(toggleInvoiceModal())}
          ></div>
          <InvoiceModalInner>
-            <Form>
-               <InvoiceForm />
-            </Form>
+            <InvoiceForm />
+            {/* <Form>
+            </Form> */}
          </InvoiceModalInner>
       </InvoiceModalRoot>
    );
@@ -54,6 +54,8 @@ const InvoiceModalRoot = styled.div`
 const InvoiceModalInner = styled.div`
    position: relative;
    background-color: ${(props) => props.theme.body};
+   padding: 2rem 0;
+   width: 100%;
    height: 100%;
    z-index: 30;
 
@@ -71,10 +73,11 @@ const Form = styled.div`
    position: relative;
    padding: 2rem 0;
    width: 90%;
+   height: 100%;
    margin: auto;
    z-index: 30;
 
    @media screen and (min-width: ${breakpoints.tablet}) {
-      padding: 3rem 0;
+      padding: 3rem 1rem;
    }
 `;
