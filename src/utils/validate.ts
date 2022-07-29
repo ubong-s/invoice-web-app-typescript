@@ -18,7 +18,7 @@ interface Props {
    createdAt: string;
    paymentTerms: string;
    description: string;
-   items: ItemProps[];
+   // items: any | undefined;
 }
 
 export const validate = (values: Props) => {
@@ -72,6 +72,10 @@ export const validate = (values: Props) => {
 
    if (!values.clientEmail) {
       errors.clientEmail = `can't be empty`;
+   } else if (
+      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.clientEmail)
+   ) {
+      errors.clientEmail = 'Invalid, type a real one';
    }
 
    if (!values.clientAddress.street) {
@@ -113,34 +117,37 @@ export const validate = (values: Props) => {
          },
       };
    }
+
    if (!values.description) {
       errors.description = `can't be empty`;
    }
+
    if (!values.createdAt) {
       errors.createdAt = `can't be empty`;
    }
 
-   if (values.items.length > 0) {
-   }
+   // if (values.items.length === 0) {
+   //    errors.items = ['An item must be added'];
+   // }
+
+   // if (values.items.length > 0) {
+   //    errors.items = [];
+   //    errors.items = [...errors.items].map((item: any, index: number) => {
+   //       if (!values.items[index].name) {
+   //          item.name = `can't be empty`;
+   //       }
+
+   //       if (!values.items[index].price) {
+   //          item.price = `can't be empty`;
+   //       }
+
+   //       if (!values.items[index].quantity) {
+   //          item.quantity = `can't be empty`;
+   //       }
+
+   //       return item;
+   //    });
+   // }
 
    return errors;
 };
-
-// senderAddress: {
-//       street: '',
-//       city: '',
-//       postCode: '',
-//       country: '',
-//    },
-//    clientName: '',
-//    clientEmail: '',
-//    clientAddress: {
-//       street: '',
-//       city: '',
-//       postCode: '',
-//       country: '',
-//    },
-//    createdAt: '',
-//    paymentTerms: '1',
-//    description: '',
-//    items: [] as ItemProps[],

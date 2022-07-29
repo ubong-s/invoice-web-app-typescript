@@ -1,14 +1,15 @@
-import { FieldArray, useFormikContext } from 'formik';
+import { FieldArray, FormikErrors, useFormikContext } from 'formik';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { ItemProps } from '../../types';
 
 interface ItemListProps {
    items: ItemProps[];
+   errors: any;
    handleChange: (e: React.ChangeEvent<any>) => void;
 }
 
-const ItemList = ({ items, handleChange }: ItemListProps) => {
+const ItemList = ({ items, errors, handleChange }: ItemListProps) => {
    return (
       <Items>
          <h4>Item List</h4>
@@ -33,6 +34,8 @@ const ItemList = ({ items, handleChange }: ItemListProps) => {
                               type='text'
                               value={item.name}
                               onChange={handleChange}
+                              required
+                              className={item.name.length === 0 ? 'active' : ''}
                            />
                            <input
                               aria-label={`items.${index}.quantity`}
@@ -40,6 +43,10 @@ const ItemList = ({ items, handleChange }: ItemListProps) => {
                               type='number'
                               value={item.quantity}
                               onChange={handleChange}
+                              required
+                              className={
+                                 item.price.length === 0 ? 'active' : ''
+                              }
                            />
                            <input
                               aria-label={`items.${index}.price`}
@@ -47,6 +54,10 @@ const ItemList = ({ items, handleChange }: ItemListProps) => {
                               type='number'
                               value={item.price}
                               onChange={handleChange}
+                              required
+                              className={
+                                 item.quantity.length === 0 ? 'active' : ''
+                              }
                            />
 
                            <div>
@@ -129,5 +140,11 @@ const Items = styled.div`
       align-items: center;
       gap: 1rem;
       grid-template-columns: 5fr 1.5fr 3fr 2fr 1fr;
+   }
+
+   input {
+      &.active {
+         border-color: ${(props) => props.theme.red};
+      }
    }
 `;

@@ -172,6 +172,7 @@ const InvoiceForm = () => {
 
                         <ItemList
                            items={values.items}
+                           errors={errors.items}
                            handleChange={handleChange}
                         />
 

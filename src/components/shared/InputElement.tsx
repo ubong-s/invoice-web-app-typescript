@@ -19,7 +19,7 @@ const InputElement = ({
    error,
 }: InputProps) => {
    return (
-      <InputRoot>
+      <InputRoot className={error && 'error'}>
          <label htmlFor={name}>
             {label}
             <small>{error}</small>
@@ -39,4 +39,14 @@ export default InputElement;
 
 const InputRoot = styled.div`
    padding: 0.75rem 0;
+
+   &.error {
+      input {
+         border-color: ${(props) => props.theme.red};
+      }
+
+      small {
+         color: ${(props) => props.theme.red};
+      }
+   }
 `;
