@@ -121,17 +121,19 @@ const bodyStyles = css`
       }
    }
 
-   .btn {
-      cursor: pointer;
-      padding: 1rem 1.5rem;
-      border-radius: ${misc.rounded.full};
+   button {
       border: none;
-      font-size: 1rem;
+      cursor: pointer;
+      border-radius: ${misc.rounded.full};
+      padding: 1rem 1rem;
+      font-size: 0.9rem;
       font-weight: ${typography.weight.semibold};
       text-transform: capitalize;
+      outline: none;
       color: ${(props) => props.theme.white};
 
-      &.edit {
+      &.edit,
+      &.draft {
          background-color: ${(props) => props.theme.bodyAlt};
          color: ${(props) => props.theme.text};
       }
@@ -140,8 +142,38 @@ const bodyStyles = css`
          background-color: ${(props) => props.theme.red};
       }
 
-      &.paid {
+      &.paid,
+      &.save {
          background-color: ${(props) => props.theme.accent};
+      }
+
+      &.save {
+         margin-left: 1rem;
+      }
+
+      &.discard {
+         color: ${(props) => props.theme.accent};
+         background-color: ${(props) => props.theme.btnWrapAlt};
+      }
+
+      &.add-item-btn {
+         display: flex;
+         gap: 0.5rem;
+         justify-content: center;
+         align-items: center;
+         background-color: ${(props) => props.theme.cardBody};
+         color: ${(props) => props.theme.text};
+      }
+
+      &.delete-item {
+         background: none;
+         line-height: 0;
+         padding: 0;
+      }
+
+      @media screen and (min-width: ${breakpoints.tablet}) {
+         padding: 1rem 2rem;
+         font-size: 1rem;
       }
    }
 

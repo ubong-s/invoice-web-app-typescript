@@ -41,17 +41,29 @@ const Status = () => {
                </div>
 
                <div className='right'>
-                  <button className='btn edit'>Edit</button>
-                  <button className='btn delete'>Delete</button>
-                  <button className='btn paid'>Mark as paid</button>
+                  <button type='button' className='edit'>
+                     Edit
+                  </button>
+                  <button type='button' className='delete'>
+                     Delete
+                  </button>
+                  <button type='button' className='paid'>
+                     Mark as paid
+                  </button>
                </div>
             </StatusBar>
          )}
          <MobileBtnContainer>
             <div className='container'>
-               <button className='btn edit'>Edit</button>
-               <button className='btn delete'>Delete</button>
-               <button className='btn paid'>Mark as paid</button>
+               <button type='button' className='edit'>
+                  Edit
+               </button>
+               <button type='button' className='delete'>
+                  Delete
+               </button>
+               <button type='button' className='paid'>
+                  Mark as paid
+               </button>
             </div>
          </MobileBtnContainer>
       </StatusRoot>

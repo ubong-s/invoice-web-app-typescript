@@ -54,30 +54,18 @@ const InvoiceModalRoot = styled.div`
 const InvoiceModalInner = styled.div`
    position: relative;
    background-color: ${(props) => props.theme.body};
-   padding: 2rem 0;
+   padding: 2rem 0 0;
    width: 100%;
    height: 100%;
    z-index: 30;
+   overflow: hidden;
 
    @media screen and (min-width: ${breakpoints.tablet}) {
       width: 70%;
       border-radius: 0 20px 20px 0;
    }
 
-   @media screen and (min-width: ${breakpoints.tablet}) {
+   @media screen and (min-width: ${breakpoints.desktop}) {
       width: 50%;
-   }
-`;
-
-const Form = styled.div`
-   position: relative;
-   padding: 2rem 0;
-   width: 90%;
-   height: 100%;
-   margin: auto;
-   z-index: 30;
-
-   @media screen and (min-width: ${breakpoints.tablet}) {
-      padding: 3rem 1rem;
    }
 `;

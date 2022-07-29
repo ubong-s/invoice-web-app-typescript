@@ -36,6 +36,10 @@ export const invoiceSlice = createSlice({
             state.filtered_data = state.data;
          }
       },
+      saveDraftInvoice: (state, action) => {
+         state.data = [...state.data, action.payload];
+         state.filtered_data = [...state.filtered_data, action.payload];
+      },
    },
 });
 

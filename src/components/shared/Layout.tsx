@@ -27,7 +27,7 @@ const LayoutRoot = styled.div`
       position: relative;
 
       &.active {
-         height: 90vh;
+         height: 88vh;
          overflow: clip;
       }
    }

@@ -17,6 +17,18 @@ export interface SingleItemProps {
    total: number;
 }
 
+export interface paymentTermsProps {
+   value: number;
+   text: string;
+}
+
+export interface ItemProps {
+   id: string;
+   name: string;
+   quantity: string;
+   price: string;
+}
+
 export enum PaymentStatus {
    paid = 'paid',
    pending = 'pending',
