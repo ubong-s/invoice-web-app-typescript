@@ -40,6 +40,28 @@ export const invoiceSlice = createSlice({
          state.data = [...state.data, action.payload];
          state.filtered_data = [...state.filtered_data, action.payload];
       },
+      markInvoiceAsPaid: (state, action) => {
+         const id = action.payload;
+
+         const temp = state.data.map((item) => {
+            if (item.id === id) {
+               return { ...item, status: 'paid' };
+            }
+
+            return item;
+         });
+
+         state.data = temp;
+         state.filtered_data = temp;
+      },
+      deleteInvoice: (state, action) => {
+         const id = action.payload;
+
+         const temp = state.data.filter((item) => item.id !== id);
+
+         state.data = temp;
+         state.filtered_data = temp;
+      },
    },
 });
 
@@ -48,6 +70,8 @@ export const {
    updateFilter,
    fetchSingleInvoice,
    updateFIlteredData,
+   markInvoiceAsPaid,
+   deleteInvoice,
 } = invoiceSlice.actions;
 
 export default invoiceSlice.reducer;

@@ -52,8 +52,31 @@ export interface InvoiceFormProps {
    };
    createdAt: string;
    paymentTerms: string;
+   paymentDue: string;
    description: string;
    items: ItemProps[];
+   total: number;
+}
+
+export interface InvoiceFormValidateProps {
+   senderAddress: {
+      street: string;
+      city: string;
+      postCode: string;
+      country: string;
+   };
+   clientName: string;
+   clientEmail: string;
+   clientAddress: {
+      street: string;
+      city: string;
+      postCode: string;
+      country: string;
+   };
+   createdAt: string;
+   paymentTerms: string;
+   description: string;
+   items: '';
 }
 
 export interface Invoice {

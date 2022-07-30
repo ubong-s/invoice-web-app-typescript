@@ -213,7 +213,7 @@ const bodyStyles = css`
       }
 
       @media screen and (min-width: ${breakpoints.tablet}) {
-         padding: 1rem 1.25rem;
+         padding: 1rem 1.5rem;
          font-size: 1rem;
       }
    }

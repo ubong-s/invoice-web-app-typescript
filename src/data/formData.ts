@@ -15,10 +15,12 @@ export const initialValues = {
       postCode: '',
       country: '',
    },
-   createdAt: '',
+   createdAt: new Date().toJSON().slice(0, 10),
    paymentTerms: '1',
+   paymentDue: '',
    description: '',
    items: [] as ItemProps[],
+   total: 0,
 };
 
 export const paymentTermsOptions = [

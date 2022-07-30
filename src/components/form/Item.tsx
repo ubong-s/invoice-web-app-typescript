@@ -12,17 +12,30 @@ interface Props {
 
 const Item = ({ index, item, handleChange, remove }: Props) => {
    const {
-      values: { items },
+      values: { items, total },
       setFieldValue,
    } = useFormikContext<InvoiceFormProps>();
 
+   const fetchTotals = () => {
+      const itemTotal = Number(item.quantity) * Number(item.price);
+      const allTotals = items.reduce((acc, item) => {
+         acc += item.total;
+         console.log(item);
+
+         return acc;
+      }, 0);
+
+      console.log(itemTotal, allTotals);
+
+      return { itemTotal, allTotals };
+   };
+
    useEffect(() => {
-      const total = Number(item.quantity) * Number(item.price);
-      setFieldValue(`items[${index}].total`, total);
+      fetchTotals();
+      setFieldValue(`items[${index}].total`, fetchTotals().itemTotal);
+      setFieldValue(`total`, fetchTotals().allTotals);
       // eslint-disable-next-line
    }, [items[index].quantity, items[index].price]);
-
-   console.log(items);
 
    return (
       <ItemRoot className='items-grid'>

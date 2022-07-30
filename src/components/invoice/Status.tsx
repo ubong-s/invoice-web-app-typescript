@@ -3,12 +3,23 @@ import { useNavigate } from 'react-router-dom';
 import { breakpoints, misc } from '../../styles/globalStyles';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
+import { useAppDispatch } from '../../app/hooks';
+import {
+   markInvoiceAsPaid,
+   deleteInvoice,
+} from '../../features/invoice/invoiceSlice';
 
 const Status = () => {
    const navigate = useNavigate();
+   const dispatch = useAppDispatch();
    const { single_invoice: invoice } = useSelector(
       (state: RootState) => state.invoice
    );
+
+   const deleteSelected = (id: any) => {
+      dispatch(deleteInvoice(id));
+      navigate(-1);
+   };
 
    return (
       <StatusRoot className='container'>
@@ -16,7 +27,7 @@ const Status = () => {
             type='button'
             name='back btn'
             className='back'
-            onClick={() => navigate(-1)}
+            onClick={() => navigate('/')}
          >
             <svg width='7' height='10' xmlns='http://www.w3.org/2000/svg'>
                <path
@@ -44,12 +55,22 @@ const Status = () => {
                   <button type='button' className='edit'>
                      Edit
                   </button>
-                  <button type='button' className='delete'>
+                  <button
+                     type='button'
+                     className='delete'
+                     onClick={() => deleteSelected(invoice?.id)}
+                  >
                      Delete
                   </button>
-                  <button type='button' className='paid'>
-                     Mark as paid
-                  </button>
+                  {invoice?.status !== 'paid' && (
+                     <button
+                        type='button'
+                        className='paid'
+                        onClick={() => dispatch(markInvoiceAsPaid(invoice?.id))}
+                     >
+                        Mark as paid
+                     </button>
+                  )}
                </div>
             </StatusBar>
          )}
@@ -58,12 +79,22 @@ const Status = () => {
                <button type='button' className='edit'>
                   Edit
                </button>
-               <button type='button' className='delete'>
+               <button
+                  type='button'
+                  className='delete'
+                  onClick={() => deleteSelected(invoice?.id)}
+               >
                   Delete
                </button>
-               <button type='button' className='paid'>
-                  Mark as paid
-               </button>
+               {invoice?.status !== 'paid' && (
+                  <button
+                     type='button'
+                     className='paid'
+                     onClick={() => dispatch(markInvoiceAsPaid(invoice?.id))}
+                  >
+                     Mark as paid
+                  </button>
+               )}
             </div>
          </MobileBtnContainer>
       </StatusRoot>

@@ -14,6 +14,9 @@ const ItemList = ({ items, error, handleChange }: ItemListProps) => {
    return (
       <Items>
          <h4>Item List</h4>
+         {error && typeof error === 'string' && (
+            <p className='error'>{error}</p>
+         )}
 
          {items.length > 0 && (
             <div className='items-grid'>
@@ -77,6 +80,10 @@ const Items = styled.div`
    h4 {
       color: ${(props) => props.theme.text};
       font-size: 1.2rem;
+   }
+
+   .error {
+      color: ${(props) => props.theme.red};
    }
 
    .items {

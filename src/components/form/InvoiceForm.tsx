@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Formik, Form } from 'formik';
 import { breakpoints } from '../../styles/globalStyles';
 import { initialValues, paymentTermsOptions } from '../../data/formData';
-import { InputElement, SelectElement, ItemList } from '..';
+import { InputElement, SelectElement, DateElement, ItemList } from '..';
 import { ItemProps, InvoiceFormProps } from '../../types';
 import { validate } from '../../utils/validate';
 import { useAppDispatch } from '../../app/hooks';
@@ -47,7 +47,12 @@ const InvoiceForm = () => {
                               label='Street Address'
                               value={values.senderAddress.street}
                               handleChange={handleChange}
-                              error={errors.senderAddress?.street}
+                              error={
+                                 errors.senderAddress?.street &&
+                                 touched.senderAddress?.street
+                                    ? errors.senderAddress?.street
+                                    : ''
+                              }
                            />
                            <ThreeColumns>
                               <InputElement
@@ -69,7 +74,12 @@ const InvoiceForm = () => {
                                  label='Post Code'
                                  value={values.senderAddress.postCode}
                                  handleChange={handleChange}
-                                 error={errors.senderAddress?.postCode}
+                                 error={
+                                    errors.senderAddress?.postCode &&
+                                    touched.senderAddress?.postCode
+                                       ? errors.senderAddress?.postCode
+                                       : ''
+                                 }
                               />
                               <InputElement
                                  name='senderAddress.country'
@@ -77,7 +87,12 @@ const InvoiceForm = () => {
                                  label='Country'
                                  value={values.senderAddress.country}
                                  handleChange={handleChange}
-                                 error={errors.senderAddress?.country}
+                                 error={
+                                    errors.senderAddress?.country &&
+                                    touched.senderAddress?.country
+                                       ? errors.senderAddress?.country
+                                       : ''
+                                 }
                               />
                            </ThreeColumns>
                         </fieldset>
@@ -91,7 +106,11 @@ const InvoiceForm = () => {
                               label={`Client's Name`}
                               value={values.clientName}
                               handleChange={handleChange}
-                              error={errors.clientName}
+                              error={
+                                 errors.clientName && touched.clientName
+                                    ? errors.clientName
+                                    : ''
+                              }
                            />
                            <InputElement
                               name='clientEmail'
@@ -99,7 +118,11 @@ const InvoiceForm = () => {
                               label={`Client's Email`}
                               value={values.clientEmail}
                               handleChange={handleChange}
-                              error={errors.clientEmail}
+                              error={
+                                 errors.clientEmail && touched.clientEmail
+                                    ? errors.clientEmail
+                                    : ''
+                              }
                            />
                            <InputElement
                               name='clientAddress.street'
@@ -107,7 +130,12 @@ const InvoiceForm = () => {
                               label='Street Address'
                               value={values.clientAddress.street}
                               handleChange={handleChange}
-                              error={errors.clientAddress?.street}
+                              error={
+                                 errors.clientAddress?.street &&
+                                 touched.clientAddress?.street
+                                    ? errors.clientAddress?.street
+                                    : ''
+                              }
                            />
 
                            <ThreeColumns>
@@ -117,7 +145,12 @@ const InvoiceForm = () => {
                                  label='City'
                                  value={values.clientAddress.city}
                                  handleChange={handleChange}
-                                 error={errors.clientAddress?.city}
+                                 error={
+                                    errors.clientAddress?.city &&
+                                    touched.clientAddress?.city
+                                       ? errors.clientAddress?.city
+                                       : ''
+                                 }
                               />
                               <InputElement
                                  name='clientAddress.postCode'
@@ -125,7 +158,12 @@ const InvoiceForm = () => {
                                  label='Post Code'
                                  value={values.clientAddress.postCode}
                                  handleChange={handleChange}
-                                 error={errors.clientAddress?.postCode}
+                                 error={
+                                    errors.clientAddress?.postCode &&
+                                    touched.clientAddress?.postCode
+                                       ? errors.clientAddress?.postCode
+                                       : ''
+                                 }
                               />
                               <InputElement
                                  name='clientAddress.country'
@@ -133,7 +171,12 @@ const InvoiceForm = () => {
                                  label='Country'
                                  value={values.clientAddress.country}
                                  handleChange={handleChange}
-                                 error={errors.clientAddress?.country}
+                                 error={
+                                    errors.clientAddress?.country &&
+                                    touched.clientAddress?.country
+                                       ? errors.clientAddress?.country
+                                       : ''
+                                 }
                               />
                            </ThreeColumns>
                         </fieldset>
@@ -141,13 +184,16 @@ const InvoiceForm = () => {
                         {/* Invoice */}
                         <fieldset>
                            <TwoColumns>
-                              <InputElement
-                                 type='date'
+                              <DateElement
                                  name='createdAt'
                                  label='Invoice Date'
                                  value={values.createdAt}
                                  handleChange={handleChange}
-                                 error={errors.createdAt}
+                                 error={
+                                    errors.createdAt && touched.createdAt
+                                       ? errors.createdAt
+                                       : ''
+                                 }
                               />
                               <SelectElement
                                  name='paymentTerms'
@@ -164,7 +210,11 @@ const InvoiceForm = () => {
                               label='Project Description'
                               value={values.description}
                               handleChange={handleChange}
-                              error={errors.description}
+                              error={
+                                 errors.description && touched.description
+                                    ? errors.description
+                                    : ''
+                              }
                            />
                         </fieldset>
 

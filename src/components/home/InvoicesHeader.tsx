@@ -161,7 +161,8 @@ const FilterRoot = styled.div<{ filterOpen: string | null }>`
       transition: ${misc.transition.ease};
 
       label {
-         display: flex;
+         display: grid;
+         grid-template-columns: auto 1fr;
          gap: 0.75rem;
          text-transform: capitalize;
 

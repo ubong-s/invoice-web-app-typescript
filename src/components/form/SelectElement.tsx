@@ -1,5 +1,7 @@
+import { useFormikContext } from 'formik';
+import { useEffect } from 'react';
 import styled from 'styled-components';
-import { paymentTermsProps } from '../../types';
+import { InvoiceFormProps, paymentTermsProps } from '../../types';
 
 interface SelectProps {
    name: string;
@@ -18,6 +20,26 @@ const SelectElement = ({
    handleChange,
    error,
 }: SelectProps) => {
+   const {
+      values: { createdAt },
+      setFieldValue,
+   } = useFormikContext<InvoiceFormProps>();
+
+   function addDays(date: string, days: number) {
+      var result = new Date(date);
+      result.setDate(result.getDate() + days);
+
+      return result.toISOString().substring(0, 10);
+   }
+
+   useEffect(() => {
+      if (createdAt) {
+         const tempDate = addDays(createdAt, Number(value));
+         setFieldValue(`paymentDue`, tempDate);
+      }
+      // eslint-disable-next-line
+   }, [value, createdAt]);
+
    return (
       <SelectRoot>
          <label htmlFor={name}>{label}</label>

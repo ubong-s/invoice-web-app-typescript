@@ -5,7 +5,7 @@ import { GlobalStyle } from './styles/globalStyles';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { RootState } from './app/store';
-import { Layout } from './components';
+import { Layout, Loading } from './components';
 const Home = lazy(() => import('./pages'));
 const Invoice = lazy(() => import('./pages/invoice'));
 const NotFound = lazy(() => import('./pages/404'));
@@ -16,7 +16,7 @@ function App() {
    return (
       <ThemeProvider theme={darkMode ? myTheme.darkTheme : myTheme.lightTheme}>
          <GlobalStyle />
-         <Suspense fallback={`Loading...`}>
+         <Suspense fallback={<Loading />}>
             <Router>
                <Layout>
                   <Routes>

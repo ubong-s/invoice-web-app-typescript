@@ -9,6 +9,8 @@ import InputElement from './form/InputElement';
 import SelectElement from './form/SelectElement';
 import ItemList from './form/ItemList';
 import InvoiceForm from './form/InvoiceForm';
+import Loading from './shared/Loading';
+import DateElement from './form/DateElement';
 
 export {
    Invoices,
@@ -22,4 +24,6 @@ export {
    InputElement,
    SelectElement,
    ItemList,
+   Loading,
+   DateElement,
 };
