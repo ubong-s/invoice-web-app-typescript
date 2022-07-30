@@ -1,6 +1,4 @@
-import { useFormikContext } from 'formik';
 import styled from 'styled-components';
-import { misc } from '../../styles/globalStyles';
 import { paymentTermsProps } from '../../types';
 
 interface SelectProps {
@@ -20,10 +18,6 @@ const SelectElement = ({
    handleChange,
    error,
 }: SelectProps) => {
-   const { values, setFieldValue } = useFormikContext();
-
-   console.log(values);
-
    return (
       <SelectRoot>
          <label htmlFor={name}>{label}</label>

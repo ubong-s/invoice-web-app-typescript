@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { misc } from '../../styles/globalStyles';
 
 interface InputProps {
    name: string;

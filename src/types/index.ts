@@ -23,16 +23,37 @@ export interface paymentTermsProps {
 }
 
 export interface ItemProps {
-   id: string;
    name: string;
    quantity: string;
    price: string;
+   total: number;
 }
 
 export enum PaymentStatus {
    paid = 'paid',
    pending = 'pending',
    draft = 'draft',
+}
+
+export interface InvoiceFormProps {
+   senderAddress: {
+      street: string;
+      city: string;
+      postCode: string;
+      country: string;
+   };
+   clientName: string;
+   clientEmail: string;
+   clientAddress: {
+      street: string;
+      city: string;
+      postCode: string;
+      country: string;
+   };
+   createdAt: string;
+   paymentTerms: string;
+   description: string;
+   items: ItemProps[];
 }
 
 export interface Invoice {

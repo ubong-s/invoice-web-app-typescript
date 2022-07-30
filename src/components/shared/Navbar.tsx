@@ -60,6 +60,11 @@ const NavbarRoot = styled.header`
    grid-template-columns: auto 1fr auto;
    align-items: center;
    background-color: ${(props) => props.theme.blue};
+   height: 80px;
+
+   a {
+      height: 100%;
+   }
 
    @media screen and (min-width: ${breakpoints.desktop}) {
       position: sticky;
@@ -76,7 +81,8 @@ const Logo = styled.div`
    display: flex;
    align-items: center;
    background-color: ${(props) => props.theme.accent};
-   padding: 1.5rem;
+   height: 100%;
+   padding: 0 1.5rem;
    border-radius: 0 20px 20px 0;
    overflow: hidden;
 
@@ -106,9 +112,14 @@ const ThemeBtn = styled.button`
    background-color: transparent;
    border: none;
    outline: none;
+   align-self: center;
    justify-self: flex-end;
-   padding: 1.5rem;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 0 1.5rem;
    cursor: pointer;
+   height: 100%;
 
    .icon {
       position: absolute;
@@ -117,6 +128,7 @@ const ThemeBtn = styled.button`
       transform: translate(-50%, -50%);
       opacity: 0;
       transition: ${misc.transition.ease};
+      line-height: 0;
 
       &.active {
          opacity: 1;
@@ -124,6 +136,7 @@ const ThemeBtn = styled.button`
    }
 
    @media screen and (min-width: ${breakpoints.desktop}) {
+      height: unset;
       justify-self: center;
       align-self: flex-end;
       padding: 2rem;
@@ -132,8 +145,9 @@ const ThemeBtn = styled.button`
 
 const Avatar = styled.div`
    display: flex;
+   justify-content: center;
    align-items: center;
-   padding: 0 1.5rem;
+   padding: 1.5rem;
    height: 100%;
    border-left: 1px solid rgba(255, 255, 255, 0.1);
 
@@ -141,6 +155,8 @@ const Avatar = styled.div`
       width: 30px;
       height: 30px;
       border-radius: 50%;
+      line-height: 0;
+      margin-bottom: 0;
    }
 
    @media screen and (min-width: ${breakpoints.desktop}) {

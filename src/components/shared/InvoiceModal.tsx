@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { RootState } from '../../app/store';
 import { toggleInvoiceModal } from '../../features/global/globalSlice';
 import { breakpoints, misc } from '../../styles/globalStyles';
-import InvoiceForm from './InvoiceForm';
+import { InvoiceForm } from '..';
 
 const InvoiceModal = () => {
    const dispatch = useAppDispatch();
@@ -32,8 +32,8 @@ const InvoiceModalRoot = styled.div`
    top: 0;
    left: 0;
    width: 100%;
-   height: 100%;
-   /* background-color: rgba(0, 0, 0, 0.5); */
+   height: calc(100vh - 80px);
+   height: 100vh;
    z-index: 20;
    transform: translateX(-100vw);
    transition: ${misc.transition.ease};
@@ -50,11 +50,15 @@ const InvoiceModalRoot = styled.div`
    &.active {
       transform: translateX(0);
    }
+
+   @media screen and (min-width: ${breakpoints.desktop}) {
+      height: 100vh;
+   }
 `;
+
 const InvoiceModalInner = styled.div`
    position: relative;
    background-color: ${(props) => props.theme.body};
-   padding: 2rem 0 0;
    width: 100%;
    height: 100%;
    z-index: 30;

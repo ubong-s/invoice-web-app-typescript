@@ -107,6 +107,46 @@ const bodyStyles = css`
       letter-spacing: 0.5px;
    }
 
+   fieldset {
+      border: none;
+   }
+
+   legend {
+      padding: 2rem 0 0.5rem;
+      font-weight: ${typography.weight.semibold};
+      color: ${(props) => props.theme.accent};
+   }
+
+   input,
+   select {
+      width: 100%;
+      height: 100%;
+      padding: 1rem;
+      border-radius: 5px;
+      border: 1px solid transparent;
+      outline: none;
+      background-color: ${(props) => props.theme.cardBody};
+      color: ${(props) => props.theme.boldText};
+      transition: ${misc.transition.ease};
+
+      &:hover,
+      &:focus {
+         border: 1px solid ${(props) => props.theme.accent};
+      }
+   }
+
+   input {
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+         -webkit-appearance: none;
+         margin: 0;
+      }
+
+      &[type='number'] {
+         -moz-appearance: textfield;
+      }
+   }
+
    .container {
       width: 90%;
       margin: auto;
@@ -121,7 +161,8 @@ const bodyStyles = css`
       }
    }
 
-   button {
+   button,
+   .btn {
       border: none;
       cursor: pointer;
       border-radius: ${misc.rounded.full};
@@ -172,7 +213,7 @@ const bodyStyles = css`
       }
 
       @media screen and (min-width: ${breakpoints.tablet}) {
-         padding: 1rem 2rem;
+         padding: 1rem 1.25rem;
          font-size: 1rem;
       }
    }

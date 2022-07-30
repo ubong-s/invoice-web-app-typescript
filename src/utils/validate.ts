@@ -1,27 +1,6 @@
-import { Invoice, ItemProps } from '../types';
+import { InvoiceFormProps } from '../types';
 
-interface Props {
-   senderAddress: {
-      street: string;
-      city: string;
-      postCode: string;
-      country: string;
-   };
-   clientName: string;
-   clientEmail: string;
-   clientAddress: {
-      street: string;
-      city: string;
-      postCode: string;
-      country: string;
-   };
-   createdAt: string;
-   paymentTerms: string;
-   description: string;
-   // items: any | undefined;
-}
-
-export const validate = (values: Props) => {
+export const validate = (values: InvoiceFormProps) => {
    let errors = {} as any;
 
    // Sender Validation
@@ -126,28 +105,9 @@ export const validate = (values: Props) => {
       errors.createdAt = `can't be empty`;
    }
 
-   // if (values.items.length === 0) {
-   //    errors.items = ['An item must be added'];
-   // }
-
-   // if (values.items.length > 0) {
-   //    errors.items = [];
-   //    errors.items = [...errors.items].map((item: any, index: number) => {
-   //       if (!values.items[index].name) {
-   //          item.name = `can't be empty`;
-   //       }
-
-   //       if (!values.items[index].price) {
-   //          item.price = `can't be empty`;
-   //       }
-
-   //       if (!values.items[index].quantity) {
-   //          item.quantity = `can't be empty`;
-   //       }
-
-   //       return item;
-   //    });
-   // }
+   if (values.items.length === 0) {
+      errors.items = 'An item must be added';
+   }
 
    return errors;
 };

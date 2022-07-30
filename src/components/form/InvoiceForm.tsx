@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 import { Formik, Form } from 'formik';
-import { breakpoints, misc, typography } from '../../styles/globalStyles';
+import { breakpoints } from '../../styles/globalStyles';
 import { initialValues, paymentTermsOptions } from '../../data/formData';
-import InputElement from './InputElement';
-import SelectElement from './SelectElement';
-import ItemList from './ItemList';
-import { ItemProps } from '../../types';
+import { InputElement, SelectElement, ItemList } from '..';
+import { ItemProps, InvoiceFormProps } from '../../types';
 import { validate } from '../../utils/validate';
 import { useAppDispatch } from '../../app/hooks';
 import { toggleInvoiceModal } from '../../features/global/globalSlice';
@@ -27,16 +25,16 @@ const InvoiceForm = () => {
 
    return (
       <InvoiceFormRoot>
-         <h2>New Invoice</h2>
+         <div className='intro'>
+            <h2>New Invoice</h2>
+         </div>
 
          <Formik
-            initialValues={initialValues}
+            initialValues={initialValues as InvoiceFormProps}
             validate={validate}
             onSubmit={handleSubmit}
          >
             {({ values, handleChange, errors, touched, resetForm }) => {
-               console.log(errors);
-
                return (
                   <>
                      <Form id='invoice'>
@@ -172,7 +170,7 @@ const InvoiceForm = () => {
 
                         <ItemList
                            items={values.items}
-                           errors={errors.items}
+                           error={errors.items}
                            handleChange={handleChange}
                         />
 
@@ -217,33 +215,42 @@ const InvoiceForm = () => {
 export default InvoiceForm;
 
 const FormButtons = styled.div`
-   padding: 2rem 1rem;
+   padding: 0 1rem;
    background-color: ${(props) => props.theme.btnWrap};
    display: flex;
    align-items: center;
    justify-content: space-between;
    gap: 1rem;
-   position: absolute;
    left: 0;
    bottom: 0;
    width: 100%;
-   box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+   height: 15%;
+   box-shadow: hsla(0, 0%, 0%, 0.15) 0px 5px 15px 0px;
 
    @media screen and (min-width: ${breakpoints.tablet}) {
-      padding: 2rem 2rem;
+      padding: 0 2rem;
+      height: 15%;
    }
 `;
 
 const InvoiceFormRoot = styled.div`
-   padding: 1rem 1rem 0;
-   height: 100%;
+   height: calc(100vh - 80px);
    margin: auto;
    z-index: 30;
    position: relative;
+   line-height: 1;
+   margin-bottom: 0;
+
+   .intro {
+      height: 10%;
+      padding: 0.5rem 1rem 0;
+      display: flex;
+      align-items: center;
+   }
 
    form {
-      margin: 1rem 0 0;
-      max-height: 60vh;
+      padding: 0 1rem 2rem;
+      height: 75%;
       overflow-y: scroll;
       padding-right: 1rem;
       padding-bottom: 1rem;
@@ -255,17 +262,6 @@ const InvoiceFormRoot = styled.div`
       &::-webkit-scrollbar-thumb {
          background-color: ${(props) => props.theme.scrollBar};
          border-radius: 10px;
-         /* outline: 1px solid slategrey; */
-      }
-
-      fieldset {
-         border: none;
-      }
-
-      legend {
-         padding: 2rem 0 0.5rem;
-         font-weight: ${typography.weight.semibold};
-         color: ${(props) => props.theme.accent};
       }
 
       label {
@@ -273,36 +269,6 @@ const InvoiceFormRoot = styled.div`
          justify-content: space-between;
          align-items: center;
          margin-bottom: 0.25rem;
-      }
-
-      input,
-      select {
-         width: 100%;
-         height: 100%;
-         padding: 1rem;
-         border-radius: 5px;
-         border: 1px solid transparent;
-         outline: none;
-         background-color: ${(props) => props.theme.cardBody};
-         color: ${(props) => props.theme.boldText};
-         transition: ${misc.transition.ease};
-
-         &:hover,
-         &:focus {
-            border: 1px solid ${(props) => props.theme.accent};
-         }
-      }
-
-      input {
-         &::-webkit-outer-spin-button,
-         &::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-         }
-
-         &[type='number'] {
-            -moz-appearance: textfield;
-         }
       }
 
       .all-errors {
@@ -313,16 +279,23 @@ const InvoiceFormRoot = styled.div`
    }
 
    @media screen and (min-width: ${breakpoints.tablet}) {
-      padding: 2rem 2rem 0;
+      height: 100vh;
+
+      .intro {
+         height: 15%;
+         padding: 0 2rem;
+      }
 
       form {
-         max-height: 65vh;
+         height: 70%;
+         padding: 2rem;
+         margin-right: 1rem;
       }
    }
 
    @media screen and (min-width: ${breakpoints.desktop}) {
-      form {
-         max-height: 63vh;
+      .intro {
+         padding: 1rem 2rem 0;
       }
    }
 `;
