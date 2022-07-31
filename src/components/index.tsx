@@ -12,6 +12,7 @@ import CreateInvoiceForm from './form/CreateInvoiceForm';
 import EditInvoiceForm from './form/EditInvoiceForm';
 import Loading from './shared/Loading';
 import DateElement from './form/DateElement';
+import Seo from './shared/Seo';
 
 export {
    Invoices,
@@ -28,4 +29,5 @@ export {
    ItemList,
    Loading,
    DateElement,
+   Seo,
 };

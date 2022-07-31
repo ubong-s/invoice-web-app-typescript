@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Invoice, InvoiceState } from '../../types';
+import { InvoiceState } from '../../types';
 import data from '../../data/data.json';
 
 const initialState: InvoiceState = {
@@ -13,18 +13,10 @@ export const invoiceSlice = createSlice({
    initialState,
    // The `reducers` field lets us define reducers and generate associated actions
    reducers: {
-      filterInvoices: (state, action) => {},
       updateFilter: (state, action: PayloadAction<string>) => {
          state.filterQuery = action.payload;
       },
-      fetchSingleInvoice: (
-         state,
-         action: PayloadAction<string | undefined>
-      ) => {
-         const temp = state.data.find((item) => item.id === action.payload);
 
-         if (temp) state.single_invoice = temp;
-      },
       updateFIlteredData: (state) => {
          if (state.filterQuery) {
             const tempData = state.data.filter(
@@ -97,9 +89,7 @@ export const invoiceSlice = createSlice({
 });
 
 export const {
-   filterInvoices,
    updateFilter,
-   fetchSingleInvoice,
    updateFIlteredData,
    markInvoiceAsPaid,
    deleteInvoice,

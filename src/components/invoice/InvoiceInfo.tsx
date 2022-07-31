@@ -1,14 +1,13 @@
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
 import { breakpoints, misc, typography } from '../../styles/globalStyles';
 import { formatDate } from '../../utils/helpers';
+import { Invoice } from '../../types';
 
-const InvoiceInfo = () => {
-   const { single_invoice: invoice } = useSelector(
-      (state: RootState) => state.invoice
-   );
+interface InvoiceInfoProps {
+   invoice: Invoice;
+}
 
+const InvoiceInfo = ({ invoice }: InvoiceInfoProps) => {
    return (
       <InvoiceInfoRoot>
          <InvoiceInner className='container'>
@@ -77,7 +76,7 @@ const InvoiceInfo = () => {
                         </tr>
                      </thead>
                      <tbody>
-                        {invoice.items.map((item, index) => (
+                        {invoice?.items.map((item: any, index: number) => (
                            <tr key={index}>
                               <td className='mobile'>
                                  {item.name}{' '}

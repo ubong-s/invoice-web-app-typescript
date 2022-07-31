@@ -1,33 +1,39 @@
-import { useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useAppDispatch } from '../app/hooks';
+import { slide } from '../animations';
 import { RootState } from '../app/store';
-import { fetchSingleInvoice } from '../features/invoice/invoiceSlice';
-import { InvoiceInfo, Status } from '../components';
+import { InvoiceInfo, InvoiceModal, Status, Seo } from '../components';
 
 const Invoice = () => {
-   const dispatch = useAppDispatch();
    const { id } = useParams();
-   const { data, single_invoice: invoice } = useSelector(
-      (state: RootState) => state.invoice
-   );
+   const { data } = useSelector((state: RootState) => state.invoice);
 
-   useEffect(() => {
-      dispatch(fetchSingleInvoice(id));
-   }, [data]);
+   const invoice = data.find((item) => item.id === id);
 
    return (
-      <>
+      <motion.div
+         variants={slide}
+         initial='initial'
+         animate='animate'
+         exit='exit'
+      >
          {invoice ? (
             <>
-               <Status />
-               <InvoiceInfo />
+               <Seo
+                  title={`${invoice.id} ${invoice.description.substring(
+                     0,
+                     15
+                  )}...`}
+               />
+               <InvoiceModal invoice={invoice} />
+               <Status invoice={invoice} />
+               <InvoiceInfo invoice={invoice} />
             </>
          ) : (
             'Invoice not found'
          )}
-      </>
+      </motion.div>
    );
 };
 

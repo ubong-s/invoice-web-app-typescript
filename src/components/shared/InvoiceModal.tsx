@@ -6,8 +6,13 @@ import { toggleInvoiceModal } from '../../features/global/globalSlice';
 import { breakpoints, misc } from '../../styles/globalStyles';
 import { CreateInvoiceForm, EditInvoiceForm } from '..';
 import { useLocation } from 'react-router-dom';
+import { Invoice } from '../../types';
 
-const InvoiceModal = () => {
+interface Props {
+   invoice?: Invoice;
+}
+
+const InvoiceModal = ({ invoice }: Props) => {
    const location = useLocation();
    const dispatch = useAppDispatch();
    const { invoiceModal } = useSelector((state: RootState) => state.global);
@@ -22,7 +27,7 @@ const InvoiceModal = () => {
             {location.pathname === '/' ? (
                <CreateInvoiceForm />
             ) : (
-               <EditInvoiceForm />
+               <EditInvoiceForm invoice={invoice} />
             )}
          </InvoiceModalInner>
       </InvoiceModalRoot>

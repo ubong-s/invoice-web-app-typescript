@@ -1,21 +1,21 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import { breakpoints, misc } from '../../styles/globalStyles';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../app/store';
 import { useAppDispatch } from '../../app/hooks';
 import {
    markInvoiceAsPaid,
    deleteInvoice,
 } from '../../features/invoice/invoiceSlice';
 import { toggleInvoiceModal } from '../../features/global/globalSlice';
+import { Invoice } from '../../types';
 
-const Status = () => {
+interface StatusProps {
+   invoice: Invoice;
+}
+
+const Status = ({ invoice }: StatusProps) => {
    const navigate = useNavigate();
    const dispatch = useAppDispatch();
-   const { single_invoice: invoice } = useSelector(
-      (state: RootState) => state.invoice
-   );
 
    const deleteSelected = (id: any) => {
       dispatch(deleteInvoice(id));
@@ -56,7 +56,9 @@ const Status = () => {
                   <button
                      type='button'
                      className='edit'
-                     onClick={() => dispatch(toggleInvoiceModal())}
+                     onClick={() => {
+                        dispatch(toggleInvoiceModal());
+                     }}
                   >
                      Edit
                   </button>

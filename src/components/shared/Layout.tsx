@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { breakpoints } from '../../styles/globalStyles';
 import Navbar from './Navbar';
 import { LayoutProps } from '../../types';
-import InvoiceModal from './InvoiceModal';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 
@@ -12,10 +11,7 @@ const Layout = ({ children }: LayoutProps) => {
    return (
       <LayoutRoot>
          <Navbar />
-         <main className={invoiceModal ? 'active' : ''}>
-            <InvoiceModal />
-            {children}
-         </main>
+         <main className={invoiceModal ? 'active' : ''}>{children}</main>
       </LayoutRoot>
    );
 };

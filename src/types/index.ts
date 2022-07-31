@@ -64,7 +64,6 @@ export interface Invoice {
 export interface InvoiceState {
    data: Invoice[];
    filtered_data: Invoice[];
-   single_invoice?: Invoice;
    filterQuery: string;
 }
 
