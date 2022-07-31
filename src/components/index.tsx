@@ -8,7 +8,8 @@ import InvoiceModal from './shared/InvoiceModal';
 import InputElement from './form/InputElement';
 import SelectElement from './form/SelectElement';
 import ItemList from './form/ItemList';
-import InvoiceForm from './form/InvoiceForm';
+import CreateInvoiceForm from './form/CreateInvoiceForm';
+import EditInvoiceForm from './form/EditInvoiceForm';
 import Loading from './shared/Loading';
 import DateElement from './form/DateElement';
 
@@ -20,7 +21,8 @@ export {
    Navbar,
    InvoiceInfo,
    InvoiceModal,
-   InvoiceForm,
+   CreateInvoiceForm,
+   EditInvoiceForm,
    InputElement,
    SelectElement,
    ItemList,

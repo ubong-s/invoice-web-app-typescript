@@ -1,12 +1,12 @@
 import { FieldArray, FormikErrors } from 'formik';
 import React from 'react';
 import styled from 'styled-components';
-import { ItemProps } from '../../types';
+import { SingleItemProps } from '../../types';
 import Item from './Item';
 
 interface ItemListProps {
-   items: ItemProps[];
-   error: string | string[] | FormikErrors<ItemProps>[] | undefined;
+   items: SingleItemProps[];
+   error: string | string[] | FormikErrors<SingleItemProps>[] | undefined;
    handleChange: (e: React.ChangeEvent<any>) => void;
 }
 

@@ -1,6 +1,6 @@
-import { InvoiceFormProps } from '../types';
+import { Invoice } from '../types';
 
-export const validate = (values: InvoiceFormProps) => {
+export const validate = (values: Invoice) => {
    let errors = {} as any;
 
    // Sender Validation

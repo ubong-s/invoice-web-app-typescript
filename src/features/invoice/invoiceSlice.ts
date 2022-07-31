@@ -36,10 +36,7 @@ export const invoiceSlice = createSlice({
             state.filtered_data = state.data;
          }
       },
-      saveDraftInvoice: (state, action) => {
-         state.data = [...state.data, action.payload];
-         state.filtered_data = [...state.filtered_data, action.payload];
-      },
+
       markInvoiceAsPaid: (state, action) => {
          const id = action.payload;
 
@@ -62,6 +59,40 @@ export const invoiceSlice = createSlice({
          state.data = temp;
          state.filtered_data = temp;
       },
+      saveDraftInvoice: (state, action) => {
+         const temp = state.data.find((item) => item.id === action.payload.id);
+
+         if (temp) {
+            let tempData = state.data.map((item) => {
+               if (item.id === action.payload.id) {
+                  return action.payload;
+               }
+               return item;
+            });
+            state.data = tempData;
+            state.filtered_data = tempData;
+         } else {
+            state.data = [...state.data, action.payload];
+            state.filtered_data = [...state.filtered_data, action.payload];
+         }
+      },
+      savePendingInvoice: (state, action) => {
+         const temp = state.data.find((item) => item.id === action.payload.id);
+
+         if (temp) {
+            let tempData = state.data.map((item) => {
+               if (item.id === action.payload.id) {
+                  return action.payload;
+               }
+               return item;
+            });
+            state.data = tempData;
+            state.filtered_data = tempData;
+         } else {
+            state.data = [...state.data, action.payload];
+            state.filtered_data = [...state.filtered_data, action.payload];
+         }
+      },
    },
 });
 
@@ -72,6 +103,8 @@ export const {
    updateFIlteredData,
    markInvoiceAsPaid,
    deleteInvoice,
+   saveDraftInvoice,
+   savePendingInvoice,
 } = invoiceSlice.actions;
 
 export default invoiceSlice.reducer;

@@ -8,6 +8,7 @@ import {
    markInvoiceAsPaid,
    deleteInvoice,
 } from '../../features/invoice/invoiceSlice';
+import { toggleInvoiceModal } from '../../features/global/globalSlice';
 
 const Status = () => {
    const navigate = useNavigate();
@@ -52,7 +53,11 @@ const Status = () => {
                </div>
 
                <div className='right'>
-                  <button type='button' className='edit'>
+                  <button
+                     type='button'
+                     className='edit'
+                     onClick={() => dispatch(toggleInvoiceModal())}
+                  >
                      Edit
                   </button>
                   <button
@@ -62,7 +67,7 @@ const Status = () => {
                   >
                      Delete
                   </button>
-                  {invoice?.status !== 'paid' && (
+                  {invoice?.status !== 'paid' && invoice?.status !== 'draft' && (
                      <button
                         type='button'
                         className='paid'
@@ -86,7 +91,7 @@ const Status = () => {
                >
                   Delete
                </button>
-               {invoice?.status !== 'paid' && (
+               {invoice?.status !== 'paid' && invoice?.status !== 'draft' && (
                   <button
                      type='button'
                      className='paid'

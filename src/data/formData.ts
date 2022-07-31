@@ -1,6 +1,8 @@
-import { ItemProps } from '../types';
+import { SingleItemProps } from '../types';
+import { addDays } from '../utils/helpers';
 
 export const initialValues = {
+   id: '',
    senderAddress: {
       street: '',
       city: '',
@@ -16,11 +18,12 @@ export const initialValues = {
       country: '',
    },
    createdAt: new Date().toJSON().slice(0, 10),
-   paymentTerms: '1',
-   paymentDue: '',
+   paymentTerms: 1,
+   paymentDue: addDays(new Date().toJSON().slice(0, 10), 1),
    description: '',
-   items: [] as ItemProps[],
+   items: [] as SingleItemProps[],
    total: 0,
+   status: 'pending',
 };
 
 export const paymentTermsOptions = [

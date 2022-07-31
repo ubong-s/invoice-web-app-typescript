@@ -35,44 +35,11 @@ export enum PaymentStatus {
    draft = 'draft',
 }
 
-export interface InvoiceFormProps {
-   senderAddress: {
-      street: string;
-      city: string;
-      postCode: string;
-      country: string;
-   };
-   clientName: string;
-   clientEmail: string;
-   clientAddress: {
-      street: string;
-      city: string;
-      postCode: string;
-      country: string;
-   };
-   createdAt: string;
-   paymentTerms: string;
-   paymentDue: string;
-   description: string;
-   items: ItemProps[];
-   total: number;
-}
-
 export interface InvoiceFormValidateProps {
-   senderAddress: {
-      street: string;
-      city: string;
-      postCode: string;
-      country: string;
-   };
+   senderAddress: AddressProps;
    clientName: string;
    clientEmail: string;
-   clientAddress: {
-      street: string;
-      city: string;
-      postCode: string;
-      country: string;
-   };
+   clientAddress: AddressProps;
    createdAt: string;
    paymentTerms: string;
    description: string;

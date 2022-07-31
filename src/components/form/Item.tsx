@@ -1,11 +1,11 @@
 import { useFormikContext } from 'formik';
 import { useEffect } from 'react';
 import styled from 'styled-components';
-import { InvoiceFormProps, ItemProps } from '../../types';
+import { Invoice, SingleItemProps } from '../../types';
 
 interface Props {
    index: number;
-   item: ItemProps;
+   item: SingleItemProps;
    handleChange: (e: React.ChangeEvent<any>) => void;
    remove: (index: number) => void;
 }
@@ -14,28 +14,28 @@ const Item = ({ index, item, handleChange, remove }: Props) => {
    const {
       values: { items, total },
       setFieldValue,
-   } = useFormikContext<InvoiceFormProps>();
+   } = useFormikContext<Invoice>();
 
    const fetchTotals = () => {
       const itemTotal = Number(item.quantity) * Number(item.price);
       const allTotals = items.reduce((acc, item) => {
          acc += item.total;
-         console.log(item);
 
          return acc;
       }, 0);
 
-      console.log(itemTotal, allTotals);
-
       return { itemTotal, allTotals };
    };
 
-   useEffect(() => {
-      fetchTotals();
-      setFieldValue(`items[${index}].total`, fetchTotals().itemTotal);
-      setFieldValue(`total`, fetchTotals().allTotals);
+   useEffect(
+      () => {
+         fetchTotals();
+         setFieldValue(`items[${index}].total`, fetchTotals().itemTotal);
+         setFieldValue(`total`, fetchTotals().allTotals);
+      },
       // eslint-disable-next-line
-   }, [items[index].quantity, items[index].price]);
+      [items[index].quantity, items[index].price, total]
+   );
 
    return (
       <ItemRoot className='items-grid'>
@@ -55,7 +55,7 @@ const Item = ({ index, item, handleChange, remove }: Props) => {
             value={item.quantity}
             onChange={handleChange}
             required
-            className={item.price.length === 0 ? 'active' : ''}
+            className={item.price.toString().length === 0 ? 'active' : ''}
          />
          <input
             aria-label={`items.${index}.price`}
@@ -64,7 +64,7 @@ const Item = ({ index, item, handleChange, remove }: Props) => {
             value={item.price}
             onChange={handleChange}
             required
-            className={item.quantity.length === 0 ? 'active' : ''}
+            className={item.quantity.toString().length === 0 ? 'active' : ''}
          />
 
          <p className='total'>{item.total.toFixed(2)}</p>

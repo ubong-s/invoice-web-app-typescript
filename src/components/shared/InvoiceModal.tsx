@@ -4,9 +4,11 @@ import { useAppDispatch } from '../../app/hooks';
 import { RootState } from '../../app/store';
 import { toggleInvoiceModal } from '../../features/global/globalSlice';
 import { breakpoints, misc } from '../../styles/globalStyles';
-import { InvoiceForm } from '..';
+import { CreateInvoiceForm, EditInvoiceForm } from '..';
+import { useLocation } from 'react-router-dom';
 
 const InvoiceModal = () => {
+   const location = useLocation();
    const dispatch = useAppDispatch();
    const { invoiceModal } = useSelector((state: RootState) => state.global);
 
@@ -17,9 +19,11 @@ const InvoiceModal = () => {
             onClick={() => dispatch(toggleInvoiceModal())}
          ></div>
          <InvoiceModalInner>
-            <InvoiceForm />
-            {/* <Form>
-            </Form> */}
+            {location.pathname === '/' ? (
+               <CreateInvoiceForm />
+            ) : (
+               <EditInvoiceForm />
+            )}
          </InvoiceModalInner>
       </InvoiceModalRoot>
    );

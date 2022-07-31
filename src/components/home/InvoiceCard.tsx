@@ -1,4 +1,3 @@
-import { log } from 'console';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { breakpoints, misc, typography } from '../../styles/globalStyles';
@@ -21,7 +20,7 @@ const InvoiceCard = ({
                   {id}
                </p>
                <p className='date'>Due {formatDate(paymentDue)}</p>
-               <p className='client'>{clientName}</p>
+               <p className='client'>{clientName || 'Unavailable'} </p>
             </InvoiceCardTop>
 
             <InvoiceCardBtm>

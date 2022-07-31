@@ -82,16 +82,17 @@ const InvoiceInfo = () => {
                               <td className='mobile'>
                                  {item.name}{' '}
                                  <span>
-                                    {item.quantity} x £ {item.total.toFixed(2)}
+                                    {item.quantity} x £{' '}
+                                    {item.total && item.total.toFixed(2)}
                                  </span>
                               </td>
                               <td className='tablet name'>{item.name}</td>
                               <td className='tablet qty'>{item.quantity}</td>
                               <td className='tablet price'>
-                                 £ {item.price.toFixed(2)}
+                                 £ {item.price && item.price.toFixed(2)}
                               </td>
                               <td className='total'>
-                                 £ {item.total.toFixed(2)}
+                                 £ {item.total && item.total.toFixed(2)}
                               </td>
                            </tr>
                         ))}
