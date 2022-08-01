@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](/screenshots/desktop_dark.png)
+![](./screenshots/desktop_dark.png)
 
 ### Links
 
@@ -43,7 +43,6 @@ Users should be able to:
 ### Built with
 
 -  Semantic HTML5 markup
--  CSS custom properties/vars
 -  Mobile-first workflow
 -  [Styled-Components](https://styled-components.com/)
 -  [React](https://reactjs.org/)
