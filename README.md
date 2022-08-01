@@ -32,7 +32,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshots/desktop_dark.png)
+![](./screenshots/desktop_dark.jpg)
 
 ### Links
 
