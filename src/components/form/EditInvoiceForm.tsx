@@ -45,8 +45,6 @@ const EditInvoiceForm = ({ invoice }: EditInvoiceProps) => {
                onSubmit={handleSubmit}
             >
                {({ values, handleChange, errors, touched, resetForm }) => {
-                  console.log(values);
-
                   return (
                      <>
                         <Form id='invoice'>
@@ -241,6 +239,13 @@ const EditInvoiceForm = ({ invoice }: EditInvoiceProps) => {
                                  - All fields must be filled.
                               </small>
                            )}
+
+                           <input
+                              type='text'
+                              hidden
+                              onChange={handleChange}
+                              value={values.total}
+                           />
                         </Form>
                         <FormButtons className='alt'>
                            <span>

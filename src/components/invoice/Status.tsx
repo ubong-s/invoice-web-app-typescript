@@ -89,7 +89,13 @@ const Status = ({ invoice }: StatusProps) => {
          )}
          <MobileBtnContainer>
             <div className='container'>
-               <button type='button' className='edit'>
+               <button
+                  type='button'
+                  className='edit'
+                  onClick={() => {
+                     dispatch(toggleInvoiceModal());
+                  }}
+               >
                   Edit
                </button>
                <button
@@ -243,13 +249,14 @@ const DeleteModal = styled.div`
    left: 0;
    top: 0;
    width: 100%;
-   height: 100vh;
+   height: calc(100vh - 80px);
    display: flex;
    align-items: center;
    justify-content: center;
    transform: scale(0);
    opacity: 0;
    transition: ${misc.transition.ease};
+   z-index: 50;
 
    .overlay {
       position: absolute;
@@ -287,5 +294,9 @@ const DeleteModal = styled.div`
    &.active {
       transform: scale(1);
       opacity: 1;
+   }
+
+   @media screen and (min-width: ${breakpoints.desktop}) {
+      height: 100vh;
    }
 `;

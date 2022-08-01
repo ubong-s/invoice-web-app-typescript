@@ -245,6 +245,13 @@ const CreateInvoiceForm = () => {
                               - All fields must be filled.
                            </small>
                         )}
+
+                        <input
+                           type='text'
+                           hidden
+                           onChange={handleChange}
+                           value={values.total}
+                        />
                      </Form>
                      <FormButtons>
                         <button

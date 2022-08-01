@@ -29,6 +29,14 @@ const Item = ({ index, item, handleChange, remove }: Props) => {
 
    useEffect(
       () => {
+         const itemTotal = Number(item.quantity) * Number(item.price);
+         setFieldValue(`total`, itemTotal);
+      },
+      // eslint-disable-next-line
+      [items[index].quantity, items[index].price]
+   );
+   useEffect(
+      () => {
          fetchTotals();
          setFieldValue(`items[${index}].total`, fetchTotals().itemTotal);
          setFieldValue(`total`, fetchTotals().allTotals);
