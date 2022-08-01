@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { toggleInvoiceModal } from '../../features/global/globalSlice';
 import {
    saveDraftInvoice,
-   savePendingInvoice,
+   saveInvoice,
 } from '../../features/invoice/invoiceSlice';
 import { generateIDs } from '../../utils/helpers';
 import {
@@ -24,7 +24,7 @@ const CreateInvoiceForm = () => {
       const temp = values.id
          ? { ...values, status: 'pending' }
          : { ...values, status: 'pending', id: generateIDs() };
-      dispatch(savePendingInvoice(temp));
+      dispatch(saveInvoice(temp));
       dispatch(toggleInvoiceModal());
    };
 

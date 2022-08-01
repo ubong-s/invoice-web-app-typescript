@@ -75,7 +75,7 @@ export const invoiceSlice = createSlice({
             state.filtered_data = [...state.filtered_data, action.payload];
          }
       },
-      savePendingInvoice: (state, action) => {
+      saveInvoice: (state, action) => {
          const temp = state.data.find((item) => item.id === action.payload.id);
 
          if (temp) {
@@ -101,7 +101,7 @@ export const {
    markInvoiceAsPaid,
    deleteInvoice,
    saveDraftInvoice,
-   savePendingInvoice,
+   saveInvoice,
 } = invoiceSlice.actions;
 
 export default invoiceSlice.reducer;

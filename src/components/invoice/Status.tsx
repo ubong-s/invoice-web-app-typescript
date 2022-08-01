@@ -24,8 +24,8 @@ const Status = ({ invoice }: StatusProps) => {
    const { deleteModal } = useSelector((state: RootState) => state.global);
 
    const deleteSelected = (id: any) => {
+      navigate('/');
       dispatch(deleteInvoice(id));
-      navigate(-1);
    };
 
    return (
@@ -271,11 +271,11 @@ const DeleteModal = styled.div`
    .content {
       position: relative;
       width: 90%;
-      max-width: 400px;
+      max-width: 500px;
       background-color: ${(props) => props.theme.cardBody};
       border-radius: 10px;
       padding: 2.5rem 2rem;
-      text-align: center;
+      text-align: left;
 
       p {
          margin: 1rem 0;
@@ -287,7 +287,8 @@ const DeleteModal = styled.div`
       .buttons {
          display: flex;
          gap: 1rem;
-         justify-content: center;
+         justify-content: flex-end;
+         margin-top: 2rem;
       }
    }
 
@@ -298,5 +299,13 @@ const DeleteModal = styled.div`
 
    @media screen and (min-width: ${breakpoints.desktop}) {
       height: 100vh;
+
+      .content {
+         padding: 3rem;
+
+         h2 {
+            font-size: 28px;
+         }
+      }
    }
 `;

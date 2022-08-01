@@ -2,6 +2,7 @@ export interface GlobalState {
    darkMode: boolean;
    invoiceModal: boolean;
    deleteModal: boolean;
+   myModal: boolean;
 }
 
 export interface AddressProps {

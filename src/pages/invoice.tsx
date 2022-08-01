@@ -3,7 +3,13 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { slide } from '../animations';
 import { RootState } from '../app/store';
-import { InvoiceInfo, InvoiceModal, Status, Seo } from '../components';
+import {
+   InvoiceInfo,
+   InvoiceModal,
+   Status,
+   Seo,
+   EmptyInvoice,
+} from '../components';
 
 const Invoice = () => {
    const { id } = useParams();
@@ -31,7 +37,7 @@ const Invoice = () => {
                <InvoiceInfo invoice={invoice} />
             </>
          ) : (
-            ''
+            <EmptyInvoice />
          )}
       </motion.div>
    );

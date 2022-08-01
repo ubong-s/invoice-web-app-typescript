@@ -18,7 +18,7 @@ const NotFound = () => {
             <h1>Oops..., Page cannot be found</h1>
 
             <Link to='/'>
-               <button>Back to Home</button>
+               <button className='paid'>Back to Home</button>
             </Link>
          </div>
       </NotFoundWrap>

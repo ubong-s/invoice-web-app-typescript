@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import { LayoutProps } from '../../types';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
+import MyModal from './MyModal';
 
 const Layout = ({ children }: LayoutProps) => {
    const { invoiceModal, deleteModal } = useSelector(
@@ -16,6 +17,7 @@ const Layout = ({ children }: LayoutProps) => {
          <main className={invoiceModal || deleteModal ? 'active' : ''}>
             {children}
          </main>
+         <MyModal />
       </LayoutRoot>
    );
 };

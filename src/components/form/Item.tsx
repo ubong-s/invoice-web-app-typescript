@@ -12,37 +12,35 @@ interface Props {
 
 const Item = ({ index, item, handleChange, remove }: Props) => {
    const {
-      values: { items, total },
+      values: { items },
       setFieldValue,
    } = useFormikContext<Invoice>();
 
    const fetchTotals = () => {
-      const itemTotal = Number(item.quantity) * Number(item.price);
       const allTotals = items.reduce((acc, item) => {
          acc += item.total;
 
          return acc;
       }, 0);
 
-      return { itemTotal, allTotals };
+      setFieldValue(`total`, allTotals);
    };
 
    useEffect(
       () => {
          const itemTotal = Number(item.quantity) * Number(item.price);
-         setFieldValue(`total`, itemTotal);
+         setFieldValue(`items[${index}].total`, itemTotal);
       },
       // eslint-disable-next-line
       [items[index].quantity, items[index].price]
    );
+
    useEffect(
       () => {
          fetchTotals();
-         setFieldValue(`items[${index}].total`, fetchTotals().itemTotal);
-         setFieldValue(`total`, fetchTotals().allTotals);
       },
       // eslint-disable-next-line
-      [items[index].quantity, items[index].price, total]
+      [items[index].total]
    );
 
    return (

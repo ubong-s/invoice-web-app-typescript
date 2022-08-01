@@ -45,6 +45,7 @@ const bodyStyles = css`
    margin: auto;
    transition: ${misc.transition.ease};
    overflow-y: scroll;
+   overflow-x: hidden;
 
    &::-webkit-scrollbar {
       width: 0.75em;
@@ -172,6 +173,7 @@ const bodyStyles = css`
       text-transform: capitalize;
       outline: none;
       color: ${(props) => props.theme.white};
+      transition: ${misc.transition.ease};
 
       &.edit,
       &.draft {
@@ -210,6 +212,10 @@ const bodyStyles = css`
          background: none;
          line-height: 0;
          padding: 0;
+      }
+
+      &:hover {
+         opacity: 0.5;
       }
 
       @media screen and (min-width: ${breakpoints.tablet}) {

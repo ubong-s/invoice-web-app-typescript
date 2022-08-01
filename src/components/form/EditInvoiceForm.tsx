@@ -5,8 +5,7 @@ import { Invoice } from '../../types';
 import { validate } from '../../utils/validate';
 import { useAppDispatch } from '../../app/hooks';
 import { toggleInvoiceModal } from '../../features/global/globalSlice';
-import { savePendingInvoice } from '../../features/invoice/invoiceSlice';
-import { generateIDs } from '../../utils/helpers';
+import { saveInvoice } from '../../features/invoice/invoiceSlice';
 import {
    FormButtons,
    InvoiceFormRoot,
@@ -22,21 +21,18 @@ const EditInvoiceForm = ({ invoice }: EditInvoiceProps) => {
    const dispatch = useAppDispatch();
 
    const handleSubmit = async (values: Invoice) => {
-      if (JSON.stringify(invoice) === JSON.stringify(values)) {
-         dispatch(toggleInvoiceModal());
-      } else {
-         const temp = values.id
-            ? { ...values, status: 'pending' }
-            : { ...values, status: 'pending', id: generateIDs() };
-         dispatch(savePendingInvoice(temp));
-         dispatch(toggleInvoiceModal());
-      }
+      const temp = { ...values };
+      dispatch(saveInvoice(temp));
+      dispatch(toggleInvoiceModal());
    };
 
    return (
       <InvoiceFormRoot>
          <div className='intro'>
-            <h2>Edit Invoice</h2>
+            <h2>
+               Edit <span>#</span>
+               {invoice?.id}
+            </h2>
          </div>
          {invoice ? (
             <Formik

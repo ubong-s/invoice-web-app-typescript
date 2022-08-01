@@ -8,7 +8,7 @@ const EmptyInvoices = () => {
 
    return (
       <EmptyInvoicesWrap>
-         <img src='./assets/illustration-empty.svg' alt='' />
+         <img src='/assets/illustration-empty.svg' alt='' />
          <h2>There is nothing here.</h2>
          <p>Create an invoice by clicking the New button and get started.</p>
 

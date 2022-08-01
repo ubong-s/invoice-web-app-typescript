@@ -37,6 +37,12 @@ export const InvoiceFormRoot = styled.div`
       padding: 0.5rem 1rem 0;
       display: flex;
       align-items: center;
+
+      h2 {
+         span {
+            color: ${(props) => props.theme.cardText};
+         }
+      }
    }
 
    form {

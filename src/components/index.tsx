@@ -14,6 +14,8 @@ import Loading from './shared/Loading';
 import DateElement from './form/DateElement';
 import Seo from './shared/Seo';
 import EmptyInvoices from './home/EmptyInvoices';
+import EmptyInvoice from './invoice/EmptyInvoice';
+import MyModal from './shared/MyModal';
 
 export {
    Invoices,
@@ -32,4 +34,6 @@ export {
    DateElement,
    Seo,
    EmptyInvoices,
+   EmptyInvoice,
+   MyModal,
 };

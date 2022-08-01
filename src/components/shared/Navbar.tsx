@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { useAppDispatch } from '../../app/hooks';
 import { RootState } from '../../app/store';
-import { toggleTheme } from '../../features/global/globalSlice';
+import {
+   toggleTheme,
+   toggleMyModal,
+   closeMyModal,
+} from '../../features/global/globalSlice';
 import { breakpoints, misc } from '../../styles/globalStyles';
 
 const Navbar = () => {
@@ -12,7 +16,7 @@ const Navbar = () => {
 
    return (
       <NavbarRoot>
-         <Link to='/'>
+         <Link to='/' onClick={() => dispatch(closeMyModal())}>
             <Logo>
                <svg xmlns='http://www.w3.org/2000/svg' width='28' height='26'>
                   <path
@@ -45,7 +49,7 @@ const Navbar = () => {
             </span>
          </ThemeBtn>
 
-         <Avatar>
+         <Avatar onClick={() => dispatch(toggleMyModal())}>
             <img src='/assets/image-ubong.jpg' alt='Ubong Sylvester' />
          </Avatar>
       </NavbarRoot>
@@ -55,20 +59,22 @@ const Navbar = () => {
 export default Navbar;
 
 const NavbarRoot = styled.header`
+   position: sticky;
+   top: 0;
    display: grid;
    gap: 1rem;
    grid-template-columns: auto 1fr auto;
    align-items: center;
    background-color: ${(props) => props.theme.blue};
    height: 80px;
+   z-index: 50;
 
    a {
       height: 100%;
    }
 
    @media screen and (min-width: ${breakpoints.desktop}) {
-      position: sticky;
-      top: 0;
+      width: 90px;
       grid-template-columns: 1fr;
       grid-template-rows: auto 1fr auto;
       height: 100vh;
@@ -144,6 +150,7 @@ const ThemeBtn = styled.button`
 `;
 
 const Avatar = styled.div`
+   cursor: pointer;
    display: flex;
    justify-content: center;
    align-items: center;
