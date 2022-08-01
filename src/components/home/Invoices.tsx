@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 import InvoiceCard from './InvoiceCard';
 import { breakpoints } from '../../styles/globalStyles';
+import EmptyInvoices from './EmptyInvoices';
 
 const Invoices = () => {
    const { filtered_data: invoices } = useSelector(
@@ -11,9 +12,15 @@ const Invoices = () => {
 
    return (
       <InvoicesRoot className='container'>
-         {invoices.map((invoice) => (
-            <InvoiceCard key={invoice.id} {...invoice} />
-         ))}
+         {invoices.length === 0 ? (
+            <EmptyInvoices />
+         ) : (
+            <>
+               {invoices.map((invoice) => (
+                  <InvoiceCard key={invoice.id} {...invoice} />
+               ))}
+            </>
+         )}
       </InvoicesRoot>
    );
 };

@@ -13,6 +13,7 @@ import EditInvoiceForm from './form/EditInvoiceForm';
 import Loading from './shared/Loading';
 import DateElement from './form/DateElement';
 import Seo from './shared/Seo';
+import EmptyInvoices from './home/EmptyInvoices';
 
 export {
    Invoices,
@@ -30,4 +31,5 @@ export {
    Loading,
    DateElement,
    Seo,
+   EmptyInvoices,
 };

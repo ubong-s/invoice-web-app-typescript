@@ -14,6 +14,10 @@ export const FormButtons = styled.div`
    height: 15%;
    box-shadow: hsla(0, 0%, 0%, 0.15) 0px 5px 15px 0px;
 
+   &.alt {
+      justify-content: flex-end;
+   }
+
    @media screen and (min-width: ${breakpoints.tablet}) {
       padding: 0 2rem;
       height: 15%;

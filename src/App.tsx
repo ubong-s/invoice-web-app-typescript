@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { myTheme } from './styles/my-theme';
 import { GlobalStyle } from './styles/globalStyles';
@@ -12,23 +12,34 @@ const Invoice = lazy(() => import('./pages/invoice'));
 const NotFound = lazy(() => import('./pages/404'));
 
 function App() {
-   const { darkMode } = useSelector((state: RootState) => state.global);
+   const {
+      global: { darkMode },
+      invoice: { data },
+   } = useSelector((state: RootState) => state);
    const location = useLocation();
+
+   useEffect(() => {
+      localStorage.setItem('theme', JSON.stringify(darkMode));
+   }, [darkMode]);
+
+   useEffect(() => {
+      localStorage.setItem('invoices', JSON.stringify(data));
+   }, [data]);
 
    return (
       <ThemeProvider theme={darkMode ? myTheme.darkTheme : myTheme.lightTheme}>
          <GlobalStyle />
-         <AnimatePresence initial={false} exitBeforeEnter>
-            <Suspense fallback={<Loading />}>
-               <Layout>
+         <Suspense fallback={<Loading />}>
+            <Layout>
+               <AnimatePresence exitBeforeEnter>
                   <Routes location={location} key={location.pathname}>
                      <Route path='/' element={<Home />} />
                      <Route path='/invoice/:id' element={<Invoice />} />
                      <Route path='*' element={<NotFound />} />
                   </Routes>
-               </Layout>
-            </Suspense>
-         </AnimatePresence>
+               </AnimatePresence>
+            </Layout>
+         </Suspense>
       </ThemeProvider>
    );
 }

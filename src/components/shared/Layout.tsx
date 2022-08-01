@@ -6,12 +6,16 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
 
 const Layout = ({ children }: LayoutProps) => {
-   const { invoiceModal } = useSelector((state: RootState) => state.global);
+   const { invoiceModal, deleteModal } = useSelector(
+      (state: RootState) => state.global
+   );
 
    return (
       <LayoutRoot>
          <Navbar />
-         <main className={invoiceModal ? 'active' : ''}>{children}</main>
+         <main className={invoiceModal || deleteModal ? 'active' : ''}>
+            {children}
+         </main>
       </LayoutRoot>
    );
 };

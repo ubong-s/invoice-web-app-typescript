@@ -1,14 +1,11 @@
 import { Formik, Form } from 'formik';
-import { initialValues, paymentTermsOptions } from '../../data/formData';
+import { paymentTermsOptions } from '../../data/formData';
 import { InputElement, SelectElement, DateElement, ItemList } from '..';
 import { Invoice } from '../../types';
 import { validate } from '../../utils/validate';
 import { useAppDispatch } from '../../app/hooks';
 import { toggleInvoiceModal } from '../../features/global/globalSlice';
-import {
-   saveDraftInvoice,
-   savePendingInvoice,
-} from '../../features/invoice/invoiceSlice';
+import { savePendingInvoice } from '../../features/invoice/invoiceSlice';
 import { generateIDs } from '../../utils/helpers';
 import {
    FormButtons,
@@ -25,19 +22,15 @@ const EditInvoiceForm = ({ invoice }: EditInvoiceProps) => {
    const dispatch = useAppDispatch();
 
    const handleSubmit = async (values: Invoice) => {
-      const temp = values.id
-         ? { ...values, status: 'pending' }
-         : { ...values, status: 'pending', id: generateIDs() };
-      dispatch(savePendingInvoice(temp));
-      dispatch(toggleInvoiceModal());
-   };
-
-   const submitDraft = (values: Invoice) => {
-      const temp = values.id
-         ? { ...values, status: 'draft' }
-         : { ...values, status: 'draft', id: generateIDs() };
-      dispatch(saveDraftInvoice(temp));
-      dispatch(toggleInvoiceModal());
+      if (JSON.stringify(invoice) === JSON.stringify(values)) {
+         dispatch(toggleInvoiceModal());
+      } else {
+         const temp = values.id
+            ? { ...values, status: 'pending' }
+            : { ...values, status: 'pending', id: generateIDs() };
+         dispatch(savePendingInvoice(temp));
+         dispatch(toggleInvoiceModal());
+      }
    };
 
    return (
@@ -49,10 +42,7 @@ const EditInvoiceForm = ({ invoice }: EditInvoiceProps) => {
             <Formik
                initialValues={invoice}
                validate={validate}
-               onSubmit={(values, { resetForm }) => {
-                  handleSubmit(values);
-                  resetForm({ values: initialValues });
-               }}
+               onSubmit={handleSubmit}
             >
                {({ values, handleChange, errors, touched, resetForm }) => {
                   console.log(values);
@@ -252,27 +242,16 @@ const EditInvoiceForm = ({ invoice }: EditInvoiceProps) => {
                               </small>
                            )}
                         </Form>
-                        <FormButtons>
-                           <button
-                              type='button'
-                              className='discard'
-                              onClick={() => {
-                                 resetForm();
-                                 dispatch(toggleInvoiceModal());
-                              }}
-                           >
-                              Discard
-                           </button>
+                        <FormButtons className='alt'>
                            <span>
                               <button
                                  type='button'
                                  className='draft'
                                  onClick={() => {
-                                    submitDraft(values);
-                                    resetForm();
+                                    dispatch(toggleInvoiceModal());
                                  }}
                               >
-                                 save as draft
+                                 Cancel
                               </button>
                               <button
                                  type='submit'

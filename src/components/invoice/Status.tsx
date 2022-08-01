@@ -1,13 +1,18 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import { breakpoints, misc } from '../../styles/globalStyles';
+import { breakpoints, misc, typography } from '../../styles/globalStyles';
 import { useAppDispatch } from '../../app/hooks';
 import {
    markInvoiceAsPaid,
    deleteInvoice,
 } from '../../features/invoice/invoiceSlice';
-import { toggleInvoiceModal } from '../../features/global/globalSlice';
+import {
+   toggleDeleteModal,
+   toggleInvoiceModal,
+} from '../../features/global/globalSlice';
 import { Invoice } from '../../types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../app/store';
 
 interface StatusProps {
    invoice: Invoice;
@@ -16,6 +21,7 @@ interface StatusProps {
 const Status = ({ invoice }: StatusProps) => {
    const navigate = useNavigate();
    const dispatch = useAppDispatch();
+   const { deleteModal } = useSelector((state: RootState) => state.global);
 
    const deleteSelected = (id: any) => {
       dispatch(deleteInvoice(id));
@@ -65,7 +71,7 @@ const Status = ({ invoice }: StatusProps) => {
                   <button
                      type='button'
                      className='delete'
-                     onClick={() => deleteSelected(invoice?.id)}
+                     onClick={() => dispatch(toggleDeleteModal())}
                   >
                      Delete
                   </button>
@@ -89,7 +95,7 @@ const Status = ({ invoice }: StatusProps) => {
                <button
                   type='button'
                   className='delete'
-                  onClick={() => deleteSelected(invoice?.id)}
+                  onClick={() => dispatch(toggleDeleteModal())}
                >
                   Delete
                </button>
@@ -104,6 +110,43 @@ const Status = ({ invoice }: StatusProps) => {
                )}
             </div>
          </MobileBtnContainer>
+
+         <DeleteModal className={deleteModal ? 'active' : ''}>
+            <div
+               className='overlay'
+               onClick={() => {
+                  dispatch(toggleDeleteModal());
+               }}
+            ></div>
+            <div className='content'>
+               <h2>Confirm Deletion</h2>
+               <p>
+                  Are you sure you want to delete <span>#{invoice.id}</span>{' '}
+                  invoice? This action cannot be undone.
+               </p>
+               <div className='buttons'>
+                  <button
+                     type='button'
+                     className='edit'
+                     onClick={() => {
+                        dispatch(toggleDeleteModal());
+                     }}
+                  >
+                     Cancel
+                  </button>
+                  <button
+                     type='button'
+                     className='delete'
+                     onClick={() => {
+                        deleteSelected(invoice?.id);
+                        dispatch(toggleDeleteModal());
+                     }}
+                  >
+                     Delete
+                  </button>
+               </div>
+            </div>
+         </DeleteModal>
       </StatusRoot>
    );
 };
@@ -192,5 +235,57 @@ const StatusBar = styled.div`
          gap: 0.75rem;
          justify-self: flex-end;
       }
+   }
+`;
+
+const DeleteModal = styled.div`
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100vh;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   transform: scale(0);
+   opacity: 0;
+   transition: ${misc.transition.ease};
+
+   .overlay {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: ${(props) => props.theme.body};
+      opacity: 0.9;
+   }
+
+   .content {
+      position: relative;
+      width: 90%;
+      max-width: 400px;
+      background-color: ${(props) => props.theme.cardBody};
+      border-radius: 10px;
+      padding: 2.5rem 2rem;
+      text-align: center;
+
+      p {
+         margin: 1rem 0;
+         span {
+            font-weight: ${typography.weight.semibold};
+         }
+      }
+
+      .buttons {
+         display: flex;
+         gap: 1rem;
+         justify-content: center;
+      }
+   }
+
+   &.active {
+      transform: scale(1);
+      opacity: 1;
    }
 `;

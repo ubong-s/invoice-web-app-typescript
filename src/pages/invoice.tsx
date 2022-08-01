@@ -31,7 +31,7 @@ const Invoice = () => {
                <InvoiceInfo invoice={invoice} />
             </>
          ) : (
-            'Invoice not found'
+            ''
          )}
       </motion.div>
    );

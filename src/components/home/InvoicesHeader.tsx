@@ -202,7 +202,7 @@ const FilterRoot = styled.div<{ filterOpen: string | null }>`
    }
 `;
 
-const NewInvoice = styled.button`
+export const NewInvoice = styled.button`
    cursor: pointer;
    display: flex;
    align-items: center;

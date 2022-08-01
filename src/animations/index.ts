@@ -1,7 +1,7 @@
 export const slide = {
    exit: {
       opacity: 0,
-      x: 300,
+      x: 100,
       transition: {
          duration: 0.6,
          ease: 'easeInOut',
@@ -9,7 +9,7 @@ export const slide = {
    },
    initial: {
       opacity: 0,
-      x: -300,
+      x: -100,
       transition: {
          duration: 0.6,
          ease: 'easeInOut',

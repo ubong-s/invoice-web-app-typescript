@@ -2,9 +2,16 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { InvoiceState } from '../../types';
 import data from '../../data/data.json';
 
+const getInvoices = () => {
+   let invoices = localStorage.getItem('invoices');
+
+   if (invoices) return JSON.parse(invoices);
+   else return [...data.invoices];
+};
+
 const initialState: InvoiceState = {
-   data: [...data.invoices],
-   filtered_data: [...data.invoices],
+   data: getInvoices(),
+   filtered_data: getInvoices(),
    filterQuery: '',
 };
 
