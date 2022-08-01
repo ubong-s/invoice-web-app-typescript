@@ -31,9 +31,13 @@ export const globalSlice = createSlice({
       },
       toggleMyModal: (state) => {
          state.myModal = !state.myModal;
+         state.deleteModal = false;
+         state.invoiceModal = false;
       },
       closeMyModal: (state) => {
          state.myModal = false;
+         state.deleteModal = false;
+         state.invoiceModal = false;
       },
    },
    // The `extraReducers` field lets the slice handle actions defined elsewhere,
